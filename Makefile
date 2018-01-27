@@ -1,3 +1,7 @@
+all: test
+check:
+install:
+clean:
 all: prolog/rdf_owl/owl.pl
 
 test:
