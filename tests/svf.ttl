@@ -1,0 +1,76 @@
+@prefix :  <http://x.org/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix oboInOwl:  <http://www.geneontology.org/formats/oboInOwl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+:ont a  owl:Ontology .
+
+:overlaps
+    a            owl:ObjectProperty .
+:part-of
+    a            owl:ObjectProperty ;
+    a            owl:TransitiveProperty ;
+    rdfs:subPropertyOf :overlaps .
+:connected-to
+    a            owl:ObjectProperty ;
+    a            owl:SymmetricProperty ;
+    a            owl:TransitiveProperty .
+:directly-connected-to
+    a            owl:ObjectProperty ;
+    a            owl:SymmetricProperty ;
+    rdfs:subPropertyOf :connected-to .
+    
+
+:finger a owl:Class;
+  rdfs:subClassOf :digit ;
+  rdfs:subClassOf [
+    a owl:Restriction;
+    owl:onProperty :part-of;
+    owl:someValuesFrom :hand ] .
+
+:fingernail a owl:Class;
+  rdfs:subClassOf :nail ;
+  rdfs:subClassOf [
+    a owl:Restriction;
+    owl:onProperty :part-of;
+    owl:someValuesFrom :finger ] .
+
+:hand a owl:Class;
+  rdfs:subClassOf :autopod ;
+  rdfs:subClassOf [
+    a owl:Restriction;
+    owl:onProperty :part-of;
+    owl:someValuesFrom :forelimb ] .
+
+:toe a owl:Class;
+  rdfs:subClassOf :digit ;
+  rdfs:subClassOf [
+    a owl:Restriction;
+    owl:onProperty :part-of;
+    owl:someValuesFrom :foot ] .
+
+:finger1 a owl:Class;
+  rdfs:subClassOf :finger .
+
+:forelimb a owl:Class;
+  rdfs:subClassOf :limb .
+:hindlimb a owl:Class;
+  rdfs:subClassOf :limb .
+
+:c1 a owl:Class;
+  rdfs:subClassOf [
+    a owl:Restriction;
+    owl:onProperty :directly-connected-to;
+    owl:someValuesFrom :c2 ] .
+:c2 a owl:Class;
+  rdfs:subClassOf [
+    a owl:Restriction;
+    owl:onProperty :directly-connected-to;
+    owl:someValuesFrom :c3 ] .
+:c3 a owl:Class;
+  rdfs:subClassOf [
+    a owl:Restriction;
+    owl:onProperty :directly-connected-to;
+    owl:someValuesFrom :c1 ] .
