@@ -1,8 +1,5 @@
 :- module(rdf_owl,
-          [regex_str/2,
-           regex_str/3,
-           
-           owl_some/3,
+          [owl_some/3,
            owl_all/3]).
 
 :- use_module(library(semweb/rdf11)).
@@ -12,17 +9,6 @@
 
 :-op(300,xfy,some).
 :-op(300,xfy,all).
-
-regex_str(R,X) :-
-        regex_str(R,X,'').
-regex_str(R,X,Flag) :-
-        X = S^^_,
-        atom_string(S,A),
-        A =~ R/Flag.
-
-
-
-        
 
 %! owl_some(?Restr, ?Property, ?Obj) is nondet.
 %
